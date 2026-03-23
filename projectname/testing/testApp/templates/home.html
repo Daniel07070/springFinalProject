@@ -2,23 +2,24 @@
 
 {% block content %}
 
-<form>
-    <input type="text" name = "q" placeholder="Search...">
-    <button type="submit">Search</button>
 <form class="text-center m-4">
     <div class="input-group mx-auto" style="width: 400px;">
-        <input type="text" class="form-control" placeholder="Search...">
+        <input type="text" class="form-control" name = "q" placeholder="Search...">
         <button class="btn btn-success" type="submit">Go</button>
     </div> 
 </form>
 
-<ul>
-    {% for chord in chords %}
-        <li>
-            {{chord.name}} - {{chord.notes}}
-        </li>
-    {% endfor%}
+{% if chords %}
+    <ul>
+        {% for chord in chords %}
+            <li>
+                {{chord.name}} - {{chord.notes}}
+            </li>
+        {% endfor%}
 
-</ul>
+    </ul>
+{% elif request.GET.q %}
+    <p> Results not found for "{{request.GET.q}}"</p>
+{% endif %}
 
 {% endblock %}
