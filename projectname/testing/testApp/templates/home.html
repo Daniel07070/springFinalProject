@@ -3,8 +3,17 @@
 {% block content %}
 
 <form>
-    <input type="text" placeholder="Search...">
+    <input type="text" name = "q" placeholder="Search...">
     <button type="submit">Search</button>
 </form>
+
+<ul>
+    {% for chord in chords %}
+        <li>
+            {{chord.name}} - {{chord.notes}}
+        </li>
+    {% endfor%}
+
+</ul>
 
 {% endblock %}
