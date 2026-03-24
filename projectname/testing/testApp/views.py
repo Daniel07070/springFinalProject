@@ -6,7 +6,7 @@ def home(request):
 	query = request.GET.get('q')
 
 	if query: # if user typed something in search then
-		chords = Chord.objects.filter(name__icontains=query)
+		chords = Chord.objects.filter(name__contains=query)
 	else:
 		chords = Chord.objects.none()
 
