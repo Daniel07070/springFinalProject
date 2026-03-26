@@ -2,24 +2,25 @@
 
 {% block content %}
 
-<form class="text-center m-4">
+<form class="text-center fixed-top m-4" style="top: 30px;">
     <div class="input-group mx-auto" style="width: 400px;">
         <input type="text" class="form-control" name = "q" placeholder="Search...">
         <button class="btn btn-success" type="submit">Go</button>
     </div> 
 </form>
 
-{% if chords %}
-    <ul>
-        {% for chord in chords %}
-            <li>
-                {{chord.name}} - {{chord.notes}}
-            </li>
-        {% endfor%}
-
-    </ul>
-{% elif request.GET.q %}
-    <p> Results not found for "{{request.GET.q}}"</p>
-{% endif %}
+<div style="margin-top: 110px;">
+    {% if chords %}
+        <ul class="list-unstyled">
+            {% for chord in chords %}
+                <li class="text-center m-4">
+                    {{chord.name}} - {{chord.notes}}
+                </li>
+            {% endfor%}
+        </ul>
+    {% elif request.GET.q %}
+        <p> Results not found for "{{request.GET.q}}"</p>
+    {% endif %}
+</div>
 
 {% endblock %}
