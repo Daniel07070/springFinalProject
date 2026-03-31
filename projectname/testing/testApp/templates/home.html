@@ -15,7 +15,17 @@
             {% for chord in chords %}
                 <li class="text-center m-4">
                     {{chord.name}} - {{chord.notes}}
+
+                    {% if chord.image %}
+                    <img src = "{{ chord.image.url }}"
+                         alt = "{{ chord.name }}"
+                         style = "width:200px;">
+                    {% else %}
+                        <p>Image not available</p>
+                    {% endif %}
                 </li>
+                
+                    
             {% endfor%}
         </ul>
     {% elif request.GET.q %}
