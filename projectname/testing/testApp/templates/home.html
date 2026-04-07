@@ -2,12 +2,27 @@
 
 {% block content %}
 
-<form class="text-center fixed-top m-4" style="top: 30px;">
+<form class="text-center fixed-top m-4" style="top: 50px; z-index: 1020;">
     <div class="input-group mx-auto" style="width: 400px;">
         <input type="text" class="form-control" name = "q" placeholder="Search...">
         <button class="btn btn-success" type="submit">Go</button>
     </div> 
 </form>
+
+<div class="fixed-top d-flex justify-content-end p-3" style="top: 0px;">
+    {% if user.is_authenticated %}
+        <span class="me-3 align-self-center">Welcome, {{user.username}}!</span>
+        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}" class="btn btn-primary btn-sm">Login</a>
+        <a href="{% url 'register'%}" class="btn btn-success btn-sm">Register</a>
+    {% endif %}
+
+
+</div>
 
 <div style="margin-top: 110px;">
     {% if chords %}
