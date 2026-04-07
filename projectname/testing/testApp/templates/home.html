@@ -31,13 +31,13 @@
                 <li class="text-center m-4">
                     {{chord.name}} - {{chord.notes}}
 
-                    {% if chord.image %}
-                    <img src = "{{ chord.image.url }}"
+                    {% for image in chord.images.all %}
+                    <img src = "{{ image.image.url }}"
                          alt = "{{ chord.name }}"
-                         style = "width:200px;">
-                    {% else %}
+                         style = "width:200px; margin: 5px;">
+                    {% empty %}
                         <p>Image not available</p>
-                    {% endif %}
+                    {% endfor %}
                 </li>
                 
                     
