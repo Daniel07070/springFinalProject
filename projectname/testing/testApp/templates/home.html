@@ -2,50 +2,30 @@
 
 {% block content %}
 
-<form class="text-center fixed-top m-4" style="top: 50px; z-index: 1020;">
-    <div class="input-group mx-auto" style="width: 400px;">
-        <input type="text" class="form-control" name = "q" placeholder="Search...">
-        <button class="btn btn-success" type="submit">Go</button>
-    </div> 
-</form>
-
-<div class="fixed-top d-flex justify-content-end p-3" style="top: 0px;">
-    {% if user.is_authenticated %}
-        <span class="me-3 align-self-center">Welcome, {{user.username}}!</span>
-        <form action="{% url 'logout' %}" method="post" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
-    {% else %}
-        <a href="{% url 'login' %}" class="btn btn-primary btn-sm">Login</a>
-        <a href="{% url 'register'%}" class="btn btn-success btn-sm">Register</a>
-    {% endif %}
-
-
-</div>
+{% include 'nav.html' %}
 
 <div style="margin-top: 110px;">
-    {% if chords %}
-        <ul class="list-unstyled">
-            {% for chord in chords %}
-                <li class="text-center m-4">
-                    {{chord.name}} - {{chord.notes}}
+        {% if chords %}
+            <ul class="list-unstyled">
+                {% for chord in chords %}
+                    <li class="text-center m-4">
+                        {{chord.name}} - {{chord.notes}}
 
-                    {% for image in chord.images.all %}
-                    <img src = "{{ image.image.url }}"
-                         alt = "{{ chord.name }}"
-                         style = "width:200px; margin: 5px;">
-                    {% empty %}
-                        <p>Image not available</p>
-                    {% endfor %}
-                </li>
-                
+                        {% for image in chord.images.all %}
+                        <img src = "{{ image.image.url }}"
+                            alt = "{{ chord.name }}"
+                            style = "width:200px; margin: 5px;">
+                        {% empty %}
+                            <p>Image not available</p>
+                        {% endfor %}
+                    </li>
                     
-            {% endfor%}
-        </ul>
-    {% elif request.GET.q %}
-        <p> Results not found for "{{request.GET.q}}"</p>
-    {% endif %}
-</div>
+                        
+                {% endfor%}
+            </ul>
+        {% elif request.GET.q %}
+            <p> Results not found for "{{request.GET.q}}"</p>
+        {% endif %}
+    </div>
 
 {% endblock %}

@@ -1,0 +1,30 @@
+<nav class="navbar bg-primary border-bottom fixed-top px-3 d-flex justify-content-between">
+    
+    <span class="navbar-brand h1 text-light m-0">ChordBASE</span>
+
+    <form class="mx-auto" style="width: 400px;">
+        <div class="input-group">
+            <input type="text" class="form-control" name = "q" placeholder="Search...">
+            <button class="btn btn-success" type="submit">Go</button>
+        </div> 
+    </form>
+
+    <div class="d-flex gap-2">
+        {% if user.is_authenticated %}
+            <span class="me-2 align-self-center text-white">Welcome, {{user.username}}!</span>
+            
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-secondary btn-sm px-2 me-2 border border-1 border-dark">Login</a>
+        {% endif %}
+    </div>
+    
+    
+
+    
+
+    
+</nav>    
