@@ -10,14 +10,17 @@
                 {% for chord in chords %}
                     <li class="text-center m-4">
                         {{chord.name}} - {{chord.notes}}
-
-                        {% for image in chord.images.all %}
-                        <img src = "{{ image.image.url }}"
-                            alt = "{{ chord.name }}"
-                            style = "width:200px; margin: 5px;">
-                        {% empty %}
-                            <p>Image not available</p>
-                        {% endfor %}
+                        
+                        <div class = "chord-images">
+                            {% for image in chord.images.all %}
+                                <img src = "{{ image.image.url }}"
+                                    alt = "{{ chord.name }}"
+                                    class = "chord-img">
+                            {% empty %}
+                                <p>Image not available</p>
+                            {% endfor %}
+                        </div>
+                        
                     </li>
                     
                         
@@ -28,4 +31,19 @@
         {% endif %}
     </div>
 
+<div class="upload-fab">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="upload-input" class="plus-icon">+</label>
+
+        <input 
+            id="upload-input" 
+            type="file" 
+            name="media"
+            accept="image/*,video/*"
+            hidden
+        >
+    </form>
+</div>
 {% endblock %}
