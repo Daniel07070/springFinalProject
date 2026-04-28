@@ -25,3 +25,10 @@ def register(request):
 		form = UserCreationForm()
 
 	return render(request, "register.html", {"form":form})
+
+def profile(request):
+	return render(request, 'profile.html')	
+
+def bookmarks(request):
+	return render(request, 'bookmarks.html')		
+	

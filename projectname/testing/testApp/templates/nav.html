@@ -12,18 +12,46 @@
     <div class="d-flex gap-2">
         {% if user.is_authenticated %}
             <span class="me-2 align-self-center text-white">Welcome, {{user.username}}!</span>
+            <button class="btn p-0"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#profileSidebar">
+
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/032/176/191/small_2x/business-avatar-profile-black-icon-man-of-user-symbol-in-trendy-flat-style-isolated-on-male-profile-people-diverse-face-for-social-network-or-web-vector.jpg"
+                    class="rounded-circle"
+                    width="40" height="40">
+            </button>
             
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger btn-sm">Logout</button>
-            </form>
         {% else %}
             <a href="{% url 'login' %}" class="btn btn-secondary btn-sm px-2 me-2 border border-1 border-dark">Login</a>
         {% endif %}
     </div>
     
     
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="profileSidebar">
+        <div class="offcanvas-body text-center">
 
+            <div class="text-center">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/032/176/191/small_2x/business-avatar-profile-black-icon-man-of-user-symbol-in-trendy-flat-style-isolated-on-male-profile-people-diverse-face-for-social-network-or-web-vector.jpg"
+                    class="rounded-circle mb-3"
+                    width="80" height="80">
+                <h6>{{ user.username }}</h6>
+            </div>  
+
+            <hr>
+            <a href="{% url 'profile' %}" class="text-decoration-none text-dark">
+                <h5 class="text-start m-3">Profile</h5>
+            </a>
+
+            <a href="{% url 'bookmarks' %}" class="text-decoration-none text-dark">
+                <h5 class="text-start m-3">Bookmarks</h5>
+            </a>
+
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger w-100">Logout</button>
+        </form>
+    </div>
+</div>
     
 
     
