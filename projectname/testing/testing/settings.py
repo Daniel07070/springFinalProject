@@ -69,6 +69,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "testing.wsgi.application"
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://localhost:8000",   
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://*.app.github.dev",
+]
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    ".app.github.dev",
+]
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
