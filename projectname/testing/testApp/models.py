@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # creates database for chords
 class Chord(models.Model):
@@ -13,3 +14,12 @@ class ChordImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.chord.name}"
+
+##user upload model
+class UserUpload(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uploads')
+    file = models.FileField(upload_to='user_uploads/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} upload"

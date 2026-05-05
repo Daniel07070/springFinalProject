@@ -32,7 +32,7 @@
     </div>
 
 <div class="upload-fab">
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">
         {% csrf_token %}
 
         <label for="upload-input" class="plus-icon">+</label>
@@ -43,6 +43,7 @@
             name="media"
             accept="image/*,video/*"
             hidden
+            onchange="this.form.submit()"
         >
     </form>
 </div>

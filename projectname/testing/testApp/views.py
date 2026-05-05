@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Chord
+from .models import Chord, UserUpload
+
 
 
 def home(request):
@@ -26,8 +28,27 @@ def register(request):
 
 	return render(request, "register.html", {"form":form})
 
+@login_required
+def upload(request):
+	if request.method == "POST":
+		file = request.FILES.get('media')
+
+		if file:
+			UserUpload.objects.create(
+				user=request.user,
+				file=file
+			)
+	return redirect('profile')
+
+@login_required
 def profile(request):
-	return render(request, 'profile.html')	
+	uploads = UserUpload.objects.filter(user=request.user).order_by('-uploaded_at')
+
+	return render(request, 'profile.html', {
+		'user_obj': request.user,
+		'uploads': uploads
+
+	})
 
 def bookmarks(request):
 	return render(request, 'bookmarks.html')		
