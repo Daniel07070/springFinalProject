@@ -2,9 +2,11 @@
 
 {% block content %}
 
-<div class="container mt-4">
+{% include "nav.html" %}
 
-    <div class="text-center mb-4">
+<div class="container mt-4" >
+
+    <div class="text-center mb-4" style="margin-top: 80px;">
         <h2>{{ user_obj.username }}</h2>
         <p>{{ user_obj.email }}</p>
     </div>
