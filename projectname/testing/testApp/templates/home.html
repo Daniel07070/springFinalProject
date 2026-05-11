@@ -4,6 +4,35 @@
 
 {% include 'nav.html' %}
 
+
+{% if featured_chords and not request.GET.q %}
+    <div class="text-center" style="margin-top: 80px;">
+        <h2>Featured Chords</h2>
+
+        <hr>
+
+        <ul class="list-unstyled">
+            {% for chord in featured_chords %}
+                <li class="text-center m-4">
+
+                    {{ chord.name }} - {{ chord.notes }}
+
+                    <div class="chord-images">
+                        {% for image in chord.images.all %}
+                            <img src="{{ image.image.url }}"
+                                 alt="{{ chord.name }}"
+                                 class="chord-img">
+                        {% empty %}
+                            <p>Image not available</p>
+                        {% endfor %}
+                    </div>
+
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
 <div style="margin-top: 110px;">
         {% if chords %}
             <ul class="list-unstyled">

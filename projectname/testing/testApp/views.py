@@ -7,14 +7,20 @@ from .models import Chord, UserUpload
 
 
 def home(request):
-	query = request.GET.get('q')
+	featured_chords = Chord.objects.filter(
+	name__in=["C Major", "G Major", "A Minor"]
+	)
 
-	if query: # if user typed something in search then
-		chords = Chord.objects.filter(name__istartswith=query)
-	else:
-		chords = Chord.objects.none()
+	chords = None
 
-	return render(request, 'home.html',{'chords': chords}) #makes chords available for template
+	if request.GET.get("q"):
+		query = request.GET.get("q")
+		chords = Chord.objects.filter(name__icontains=query)
+
+	return render(request, "home.html", {
+		"chords": chords,
+		"featured_chords": featured_chords,
+	})
 
 def register(request):
 	if request.method == "POST":
