@@ -51,5 +51,5 @@ def profile(request):
 	})
 
 def bookmarks(request):
-	return render(request, 'bookmarks.html')		
+	return render(request, 'bookmarks.html')	
 	
