@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.auth.models import User
 from .models import Chord, UserUpload
 
 
@@ -10,15 +11,19 @@ def home(request):
 	featured_chords = Chord.objects.filter(
 	name__in=["C Major", "G Major", "A Minor"]
 	)
+	query = request.GET.get('q')
+	#chords = None
 
-	chords = None
-
-	if request.GET.get("q"):
-		query = request.GET.get("q")
+	if query:
 		chords = Chord.objects.filter(name__icontains=query)
+		users = User.objects.filter(username__icontains=query)
+	else:
+		chords = Chord.objects.none()
+		users = User.objects.none()
 
 	return render(request, "home.html", {
 		"chords": chords,
+		"users": users,
 		"featured_chords": featured_chords,
 	})
 
@@ -29,6 +34,8 @@ def register(request):
 			form.save()
 			messages.success(request, "Account created successfully")
 			return redirect ("login")
+		else:
+			print(form.errors)
 	else:
 		form = UserCreationForm()
 
@@ -44,14 +51,14 @@ def upload(request):
 				user=request.user,
 				file=file
 			)
-	return redirect('profile')
+	return redirect('profile', username=request.user.username)
 
 @login_required
-def profile(request):
-	uploads = UserUpload.objects.filter(user=request.user).order_by('-uploaded_at')
-
+def profile(request, username):
+	user_obj = User.objects.get(username=username)
+	uploads = UserUpload.objects.filter(user=user_obj).order_by('-uploaded_at')
 	return render(request, 'profile.html', {
-		'user_obj': request.user,
+		'user_obj': user_obj,
 		'uploads': uploads
 
 	})
