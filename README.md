@@ -1,7 +1,19 @@
 # ChordBASE Project
 
-Our project goal is to make a reliable and user-friendly app for musicians (specifically guitarists) to have a place to research and learn different guitar chords.
+## Overview
 
-When searching for guitar chords, we would want the notes of the chord to be shown, as well as images showing different ways that the chord could be played on guitar. Also, we want to implement a section of the app that combines together chords to make different progressions that the user could use. These would be the barebones features for the app, but there are a lot of extra features that we would love to add on.
+ChordBase is designed to help guitarists research and learn different guitar chords and chord progressions in a user-friendly environment.  The goal is to provide musicians with a platform where they can quickly search for chord information and explore different playing styles.
 
-A way to make the app more interactive is to add the ability for users to upload chords or chord progressions for other users of the app to view, which would also be useful to other users to diversify all of the available chords. Also, a rating feature (with 5 stars) would be nice because it would help filter out bad quality chords/chord progressions.
+## Features
+
+As a user, you can:
+- Search for guitar chords
+- View images showing different ways to play chords on the guitar
+- Create user accounts
+- Upload yoour own photos and videos to your profile
+- Search for and view other user accounts
+
+## Future Improvments
+
+- Bookimarking favorites
+- A rating sytem for post
