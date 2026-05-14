@@ -53,7 +53,6 @@ def upload(request):
 			)
 	return redirect('profile', username=request.user.username)
 
-@login_required
 def profile(request, username):
 	user_obj = User.objects.get(username=username)
 	uploads = UserUpload.objects.filter(user=user_obj).order_by('-uploaded_at')
